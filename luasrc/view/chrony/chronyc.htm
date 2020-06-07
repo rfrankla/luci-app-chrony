@@ -1,0 +1,93 @@
+<%#
+ Copyright 2020 Richard Frankland <rfrankla (at) yahoo .dot com>
+-%>
+
+<%+header%>
+
+<script type="text/javascript">//<![CDATA[
+	var xhr = new XHR();
+
+	function update_results()
+	{
+                var cmd = this.value;
+		var numeric_only = document.getElementById('numeric_only');
+                var verbose_heads = document.getElementById('verbose_heads');
+		var server = document.getElementById('server');
+
+		var opts = "";
+		if (numeric_only.checked)
+		{
+			opts += "-n ";
+		}
+                var heads_opts = "";
+                if ((cmd === "sources" || cmd === "sourcestats") && verbose_heads.checked)
+                {
+                        cmd += " -v";
+                }
+		// Note: the args simple and NOT encodeURI() 
+                var args = opts + cmd + " " + server.value;
+
+		var legend = document.getElementById('chrony-cmd-legend');
+		var output = document.getElementById('chrony-cmd-output');
+
+		if (legend && output)
+		{
+			output.innerHTML =
+				'<img src="<%=resource%>/icons/loading.gif" alt="<%:Loading%>" style="vertical-align:middle" /> ' +
+				'<%:Waiting for command to complete...%>'
+			;
+
+			legend.parentNode.style.display = 'block';
+			legend.style.display = 'inline';
+			legend.innerHTML = "chronyc " + args;
+
+			xhr.post('<%=url('admin/system')%>/chronyc_cmd/' + args,  { token: '<%=token%>' },
+				function(x)
+				{
+					if (x.responseText)
+					{
+//						legend.style.display = 'none';
+						output.innerHTML = String.format('<pre>%h</pre>', x.responseText);
+					}
+					else
+					{
+//						legend.style.display = 'none';
+						output.innerHTML = '<span class="error"><%:Bad parameters%></span>';
+					}
+				}
+			);
+		}
+	}
+//]]></script>
+
+<form method="post" action="<%=url('admin/system/chronyc')%>">
+	<div class="cbi-map">
+		<h2 name="content"><%:Chrony daemon monitor%></h2>
+
+		<div class="cbi-section">
+			<legend><%:Monitor commands%></legend>
+
+			<input type="checkbox" id="numeric_only" class="" />
+			<label for="numeric_only"><%:Numeric addresses output (no name lookup)%></label>
+			<input type="checkbox" id="verbose_heads" class="" />
+			<label for="verbose_heads"><%:Verbose headings (if possible)%></label>
+			<br />
+			<input type="button" value="tracking" class="cbi-button cbi-button-apply" onclick="update_results.call(this)" />
+			<input type="button" value="sources" class="cbi-button cbi-button-apply" onclick="update_results.call(this)" />
+			<input type="button" value="sourcestats" class="cbi-button cbi-button-apply" onclick="update_results.call(this)" />
+			<input type="button" value="activity" class="cbi-button cbi-button-apply" onclick="update_results.call(this)" />
+			<input type="button" value="ntpdata" class="cbi-button cbi-button-apply" onclick="update_results.call(this)" />
+			<input type="button" value="clients" class="cbi-button cbi-button-apply" onclick="update_results.call(this)" />
+			<input type="button" value="serverstats" class="cbi-button cbi-button-apply" onclick="update_results.call(this)" />
+			<input id="server" style="margin: 5px 0" type="text" value="" name="server" placeholder="optional-server-parameter"/><br />
+
+		</div>
+	</div>
+
+	<div class="cbi-section" style="display:none">
+		<strong id="chrony-cmd-legend"></strong>
+		<span id="chrony-cmd-output"></span>
+	</div>
+</form>
+
+<%+footer%>
