@@ -4,9 +4,9 @@ luci-app-chrony
 LuCI app for openwrt-chrony
 ---------------------------
 
-This is a LuCI front-end for the OpenWRT "chrony" package. 
-It manages the UCI config file, and will signal the chronyd daemon to  
-restart when changes are applied in the router's web user interface. 
+This is a LuCI front-end for the OpenWRT "chrony" package.
+It manages the UCI config file, and will signal the chronyd daemon to
+restart when changes are applied in the router's web user interface.
 Additionally, a few of the CLI commands of the monitor program, chronyc,
 are available in a separate view.
 
