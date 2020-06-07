@@ -27,7 +27,7 @@ of the main openwrt build.
     $ mkdir rfrankla-feed  
     $ cd rfrankla-feed  
  2. Clone this repo into this location  
-    $ git clone http://
+    $ git clone https://github.com/rfrankla/luci-app-chrony
  3. cd to the location of your openwrt build system. 
     Add this local feed to your build system. Edit feeds.conf and add the line  
   
@@ -40,7 +40,7 @@ or feed directly from this repo
  3. cd to the location of your openwrt build system.
     Add this remote feed to your build system. Edit feeds.conf and add the line
 
-src-git rfrankla-feeds https://
+src-git rfrankla-feeds https://github.com/rfrankla/luci-app-chrony
 
 Activating the Feed into your build system
 ------------------------------------------
