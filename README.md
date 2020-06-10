@@ -13,12 +13,18 @@ are available in a separate view.
 This is my first attempt at creating a LuCI interface, and a package, 
 hence the 0.9 version. This is beta, until I hear it is not.
 
+Using this as an opkg feed to your device's available software
+--------------------------------------------------------------
+In LuCI, navigate to System -> Software -> Actions: \[ Configure opkg... \]  
+then in opkg/customfeeds.conf add the following  
+`src/gz rfrankla_luci https://github.com/rfrankla/luci-app-chrony/raw/master`
+
+Then \[save\], then Actions: \[ Updatelists... \]
+
 Using this source
 -----------------
 This may be used as a separate feed for building a separate package or  
 for a module included in a flash image (...squashfs-sysupgrade.bin)
-
-I may push the package file itself since it is PKGARCH:=all
 
 Making a local feed for your build system
 -----------------------------------------
