@@ -19,7 +19,7 @@ In LuCI, navigate to System -> Software -> Actions: \[ Configure opkg... \]
 then in opkg/customfeeds.conf add the following  
 `src/gz rfrankla_luci https://github.com/rfrankla/luci-app-chrony/raw/master`
 
-Then \[save\], then Actions: \[ Updatelists... \]
+Then \[Save\], then Actions: \[ Update lists... \]
 
 Using this source
 -----------------
