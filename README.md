@@ -30,14 +30,14 @@ Making a local feed for your build system
 -----------------------------------------
  1. Create new, or use existing, local feed location outside your clone
 of the main openwrt build.  
-    $ mkdir rfrankla-feed  
-    $ cd rfrankla-feed  
+    $ mkdir rfranklafeed  
+    $ cd rfranklafeed  
  2. Clone this repo into this location  
     $ git clone https://github.com/rfrankla/luci-app-chrony
  3. cd to the location of your openwrt build system. 
     Add this local feed to your build system. Edit feeds.conf and add the line  
   
-src-link rfrankla-feed \<full-path-to\>/rfrankla-feed  
+`src-link rfranklafeed \<full-path-to\>/rfranklafeed`
 
 or feed directly from this repo
 -------------------------------
@@ -46,26 +46,23 @@ or feed directly from this repo
  3. cd to the location of your openwrt build system.
     Add this remote feed to your build system. Edit feeds.conf and add the line
 
-src-git rfrankla-feeds https://github.com/rfrankla/luci-app-chrony
+`src-git rfranklafeed https://github.com/rfrankla/luci-app-chrony`
 
 Activating the Feed into your build system
 ------------------------------------------
- 4. Update and install the feed
-./scripts/feeds update rfrankla-feed
-./scripts/feeds install -a -p rfrankla-feed
+ 4. Update and install the feed  
+    $ ./scripts/feeds update rfranklafeed  
+    $ ./scripts/feeds install -a -p rfranklafeed  
 
 Proceed as normal with building
 -------------------------------
  5. open the configuration menu  
  $ make menuconfig  
  LuCI --->  
-    3. Applications --->  
+   .3. Applications --->  
         luci-app-chrony ......  
         
 for additional help see:  
 https://gitlab.com/silverk/luci-app-hello-world  
 https://openwrt.org/docs/guide-developer/helloworld/start  
-
-
-
 
